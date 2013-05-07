@@ -1,0 +1,36 @@
+﻿@using Groceries.Entities;
+@model List<Groceries>
+
+@{
+    ViewBag.Title = "Groceries List";
+    Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+
+<script type="text/javascript" >
+    $('#MPIndex').die('pageinit').live('pageinit', function (event) {
+        Home.InitIndex();
+    });
+</script>
+<div data-role="header" data-theme="a" >
+    <h1>@ViewBag.Header</h1>
+</div>
+<div data-role="content" class="ui-scrolllistview">	
+@using (Html.BeginForm("Index", "home", FormMethod.Post, new { id = "FormIndex" })) {
+
+    <div data-role="controlgroup">
+        <ul data-role="listview" data-inset="true" data-theme="c">
+                    @foreach (var grocery in Model) {
+            <li><span class="imgtoggle"><img src="@Url.Content("~/content/images/uncheck.png")" class="ui-li-icon"  /><img src="@Url.Content("~/content/images/check.png")" class="ui-li-icon on h" /></span><a class="toggleimage" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@grocery.Product.Name</a><a href="/home/RemoveListItem/@grocery.Id" data-theme="g" data-icon="delete">Remove</a></li>
+                    }
+        </ul>
+    </div>
+}
+</div>
+<div data-role="footer"  data-theme="a">
+    <div data-role="navbar">
+		<ul>
+            <li><a href="/home/ClearList" data-role="button"  data-icon="star" >New List</a></li>
+			<li><a href="/home/item" data-role="button" data-icon="check">Products</a></li>
+		</ul>
+	</div>
+</div>

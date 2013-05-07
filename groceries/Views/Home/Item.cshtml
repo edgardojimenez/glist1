@@ -1,0 +1,33 @@
+﻿@using Groceries.Entities;
+@model List<Product>
+@{
+    ViewBag.Title = "Products List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div data-role="header" data-theme="a">
+	<h1>@ViewBag.Header</h1>
+</div>
+<div data-role="content" >
+<br />
+    <div data-role="controlgroup">
+        <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b" data-filter="true" >
+        @foreach (var product in Model) {
+            if (product.Id == -1) { 
+                <li data-role="list-divider">@product.Name</li>
+            } else { 
+                <li><a href="/home/additem/@product.Id">@product.Name</a><a href="/home/removeitem/@product.Id" data-theme="g" data-icon="delete">Remove</a></li>
+            }
+        }
+        </ul>
+    </div>
+</div>
+<div data-role="footer" data-theme="a">
+	<div data-role="navbar">
+		<ul>
+            <li><a href="/home/index" data-icon="home" >List</a></li>
+			<li><a href="/home/AddProduct" data-icon="plus" >Add</a></li>
+		</ul>
+	</div>
+</div>
+

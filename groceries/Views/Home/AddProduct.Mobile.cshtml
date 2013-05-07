@@ -1,0 +1,36 @@
+﻿@using Groceries.Entities;
+@model List<Product>
+@{
+    ViewBag.Title = "Product Add";
+    Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+
+<script type="text/javascript" >
+    $('#MPAddProduct').die('pageinit').live('pageinit', function (event) {
+        Home.InitAddProduct();
+    });
+</script>
+
+<div data-role="header" data-theme="a" >
+    <h1>@ViewBag.Header</h1>
+</div>
+<div data-role="content" >
+@using (Html.BeginForm("AddProduct", "home", FormMethod.Post, new { id = "ProductForm" })) {
+    <br /><br />
+    <div data-role="controlgroup">
+        <p>&nbsp;Product Name:</p>
+        <input type="text" id="productName" name="productName" size="50" maxlength="32" />
+        <p>@ViewBag.Message</p>
+    </div>
+    <br /><br />
+}
+</div>
+<div data-role="footer" data-theme="a">
+	<div data-role="navbar">
+		<ul>
+            <li><a href="/home/index" data-icon="home" >List</a></li>
+            <li><a href="/home/item" data-icon="check" >Products</a></li>
+			<li><a href="#" id="LinkAddProduct" data-icon="plus" >Save</a></li>
+		</ul>
+	</div>
+</div>
